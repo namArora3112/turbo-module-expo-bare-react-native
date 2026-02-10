@@ -1,10 +1,19 @@
-#import "AepTurboCore.h"
+#import "RCTAepTurboCore.h"
 #import "AepTurboCoreAEP.h"
 #import <React/RCTBridgeModule.h>
 
-@implementation AepTurboCore
+@implementation RCTAepTurboCore
 
-RCT_EXPORT_MODULE(AepTurboCore)
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeAepTurboCoreSpecJSI>(params);
+}
+
++ (NSString *)moduleName
+{
+  return @"AepTurboCore";
+}
 
 - (NSNumber *)multiply:(double)a b:(double)b {
     NSNumber *result = @(a * b);
@@ -21,12 +30,6 @@ RCT_EXPORT_MODULE(AepTurboCore)
                   reject:(RCTPromiseRejectBlock)reject {
     NSString *version = AepTurboCore_ExtensionVersion();
     resolve(version ?: @"0.0.0");
-}
-
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
-{
-    return std::make_shared<facebook::react::NativeAepTurboCoreSpecJSI>(params);
 }
 
 @end

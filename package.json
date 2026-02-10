@@ -115,6 +115,11 @@
     "jsSrcsDir": "src",
     "android": {
       "javaPackageName": "com.aepturbocore"
+    },
+    "ios": {
+      "modulesProvider": {
+        "AepTurboCore": "RCTAepTurboCore"
+      }
     }
   },
   "prettier": {
