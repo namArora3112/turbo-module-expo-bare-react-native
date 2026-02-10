@@ -1,0 +1,75 @@
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+# Enable New Architecture so TurboModuleManager is created (required for AepTurboCore turbo module)
+ENV['RCT_NEW_ARCH_ENABLED'] = '1'
+
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
+
+target 'RN074BareExample' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+
+  target 'RN074BareExampleTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  post_install do |installer|
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
+    )
+    # Fix AEP pods: disable Swift module interface to avoid "underlying Objective-C module not found" verification failure
+    installer.pods_project.targets.each do |target|
+      if target.name.start_with?('AEP')
+        target.build_configurations.each do |config|
+          config.build_settings['SWIFT_STRICT_CONCURRENCY'] = 'minimal'
+          config.build_settings['SWIFT_SUPPRESS_WARNINGS'] = 'YES'
+          config.build_settings['SWIFT_EMIT_MODULE_INTERFACE'] = 'NO'
+        end
+      end
+    end
+    # Enable Clang modules for AepTurboCore (no C++ modules to avoid breaking RN headers)
+    installer.pods_project.targets.each do |target|
+      if target.name == 'AepTurboCore'
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'YES'
+          config.build_settings['CLANG_ENABLE_OBJC_ARC'] = 'YES'
+        end
+      end
+    end
+    # Force link AepTurboCore so the turbo module is never stripped (fix "AepTurboCore could not be found")
+    installer.aggregate_targets.each do |aggregate_target|
+      if aggregate_target.name == 'Pods-RN074BareExample'
+        aggregate_target.user_project.native_targets.each do |native_target|
+          if native_target.name == 'RN074BareExample'
+            native_target.build_configurations.each do |config|
+              config.build_settings['OTHER_LDFLAGS'] ||= ['$(inherited)']
+              config.build_settings['OTHER_LDFLAGS'] << '-force_load $(PODS_CONFIGURATION_BUILD_DIR)/AepTurboCore/libAepTurboCore.a'
+            end
+          end
+        end
+      end
+    end
+  end
+end
