@@ -3,15 +3,15 @@ package com.aepturbocore
 import com.adobe.marketing.mobile.MobileCore
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.module.annotations.ReactModule
 
-@ReactModule(name = AepTurboCoreModule.NAME)
+/**
+ * Turbo Native Module implementing NativeAepTurboCoreSpec.
+ * Registered via AepTurboCorePackage (no @ReactModule; see Turbo Native Modules doc).
+ */
 class AepTurboCoreModule(reactContext: ReactApplicationContext) :
   NativeAepTurboCoreSpec(reactContext) {
 
-  override fun getName(): String {
-    return NAME
-  }
+  override fun getName(): String = NAME
 
   // Example method
   // See https://reactnative.dev/docs/native-modules-android
