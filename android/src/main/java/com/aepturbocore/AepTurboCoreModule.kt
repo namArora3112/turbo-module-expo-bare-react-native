@@ -1,7 +1,8 @@
 package com.aepturbocore
 
-import com.facebook.react.bridge.ReactApplicationContext
+import com.adobe.marketing.mobile.MobileCore
 import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule
 
 @ReactModule(name = AepTurboCoreModule.NAME)
@@ -19,15 +20,14 @@ class AepTurboCoreModule(reactContext: ReactApplicationContext) :
   }
 
   /**
-   * Returns the version of the AEP Turbo Core extension
+   * Returns the version of the AEP Turbo Core extension (from MobileCore.extensionVersion()).
    * @param promise Promise that resolves with the extension version
    */
   override fun extensionVersion(promise: Promise) {
-    promise.resolve(EXTENSION_VERSION)
+    promise.resolve(MobileCore.extensionVersion())
   }
 
   companion object {
     const val NAME = "AepTurboCore"
-    const val EXTENSION_VERSION = "1.0.0"
   }
 }

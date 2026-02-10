@@ -74,4 +74,6 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation platform("com.adobe.marketing.mobile:sdk-bom:[3.8.0,4.0.0)")
+  implementation "com.adobe.marketing.mobile:core"
 }

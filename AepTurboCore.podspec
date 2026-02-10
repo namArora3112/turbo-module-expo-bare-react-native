@@ -14,7 +14,10 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/namarora_adobe/aep-turbo-core.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm,swift,cpp}"
-  s.private_header_files = "ios/**/*.h"
+  s.public_header_files = "ios/AepTurboCore.h"
+  s.private_header_files = "ios/AepTurboCoreAEP.h"
+
+  s.dependency "AEPCore", ">= 5.4.0", "< 6.0.0"
 
   install_modules_dependencies(s)
 end
