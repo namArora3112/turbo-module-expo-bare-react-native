@@ -2014,10 +2014,17 @@ acorn@^8.15.0:
   version "0.0.1"
   resolved "file:example"
   dependencies:
-    "@adobe/react-native-aepmessaging" "7.3.0"
+    "@adobe/react-native-aepedge" latest
+    "@adobe/react-native-aepedgeidentity" latest
+    "@adobe/react-native-aepmessaging" latest
+    "@react-navigation/drawer" "^7.0.0"
+    "@react-navigation/native" "^7.0.0"
     aep-turbo-core "file:.."
     react "19.2.0"
     react-native "0.83.0"
+    react-native-gesture-handler "^2.0.0"
+    react-native-safe-area-context "^5.0.0"
+    react-native-screens "^4.0.0"
 
 "aep-turbo-core@file:..":
   version "0.1.0"

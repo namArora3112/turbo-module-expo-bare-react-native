@@ -118,7 +118,7 @@
     },
     "ios": {
       "modulesProvider": {
-        "AepTurboCore": "RCTAepTurboCore"
+        "NativeAepTurboCore": "RCTAepTurboCore"
       }
     }
   },

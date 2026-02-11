@@ -242,6 +242,6 @@ class AepTurboCoreModule(reactContext: ReactApplicationContext) :
   }
 
   companion object {
-    const val NAME = "AepTurboCore"
+    const val NAME = "NativeAepTurboCore"
   }
 }

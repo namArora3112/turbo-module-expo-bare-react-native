@@ -1,10 +1,11 @@
-import { TurboModuleRegistry, type TurboModule } from 'react-native';
+import type { TurboModule } from 'react-native';
+import { TurboModuleRegistry } from 'react-native';
 
 export interface Spec extends TurboModule {
   // Example
   multiply(a: number, b: number): number;
 
-  // MobileCore
+  // Core (MobileCore)
   extensionVersion(): Promise<string>;
   core_configureWithAppId(appId: string): void;
   core_initialize(initOptions: Object): Promise<void>;
@@ -16,7 +17,10 @@ export interface Spec extends TurboModule {
   core_getPrivacyStatus(): Promise<string>;
   core_getSdkIdentities(): Promise<string>;
   core_dispatchEvent(eventMap: Object): Promise<void>;
-  core_dispatchEventWithResponseCallback(eventMap: Object, timeoutMs: number): Promise<Object>;
+  core_dispatchEventWithResponseCallback(
+    eventMap: Object,
+    timeoutMs: number
+  ): Promise<Object>;
   core_trackAction(action: string, contextData: Object | null): void;
   core_trackState(state: string, contextData: Object | null): void;
   core_setAdvertisingIdentifier(advertisingIdentifier: string | null): void;
@@ -30,8 +34,15 @@ export interface Spec extends TurboModule {
   // Identity
   identity_extensionVersion(): Promise<string>;
   identity_syncIdentifiers(identifiers: Object | null): void;
-  identity_syncIdentifiersWithAuthState(identifiers: Object | null, authenticationState: string): void;
-  identity_syncIdentifier(identifierType: string, identifier: string, authenticationState: string): void;
+  identity_syncIdentifiersWithAuthState(
+    identifiers: Object | null,
+    authenticationState: string
+  ): void;
+  identity_syncIdentifier(
+    identifierType: string,
+    identifier: string,
+    authenticationState: string
+  ): void;
   identity_appendVisitorInfoForURL(baseURL: string): Promise<string>;
   identity_getUrlVariables(): Promise<string>;
   identity_getIdentifiers(): Promise<Object[]>;
@@ -44,4 +55,4 @@ export interface Spec extends TurboModule {
   signal_extensionVersion(): Promise<string>;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('AepTurboCore');
+export default TurboModuleRegistry.getEnforcing<Spec>('NativeAepTurboCore');

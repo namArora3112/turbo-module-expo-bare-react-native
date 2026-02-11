@@ -273,7 +273,7 @@ static NSString *const kAuthenticationState = @"authenticationState";
 }
 
 + (NSString *)moduleName {
-  return @"AepTurboCore";
+  return @"NativeAepTurboCore";
 }
 
 @end

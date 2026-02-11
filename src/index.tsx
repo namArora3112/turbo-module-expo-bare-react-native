@@ -1,73 +1,94 @@
-import AepTurboCore from './NativeAepTurboCore';
+import NativeAepTurboCore from './NativeAepTurboCore';
 
 export function multiply(a: number, b: number): number {
-  return AepTurboCore.multiply(a, b);
+  return NativeAepTurboCore.multiply(a, b);
 }
 
 /**
- * Returns the version of the AEP Core extension (MobileCore).
+ * Returns the version of the AEP Core extension.
  */
 export function extensionVersion(): Promise<string> {
-  return AepTurboCore.extensionVersion();
+  return NativeAepTurboCore.extensionVersion();
 }
 
-// --- MobileCore API (mirrors @adobe/react-native-aepcore) ---
-export const MobileCore = {
-  extensionVersion: () => AepTurboCore.extensionVersion(),
-  configureWithAppId: (appId?: string) => AepTurboCore.core_configureWithAppId(appId ?? ''),
-  initialize: (initOptions: Record<string, unknown>) => AepTurboCore.core_initialize(initOptions),
-  clearUpdatedConfiguration: () => AepTurboCore.core_clearUpdatedConfiguration(),
+// --- AepTurboCore API (Core / MobileCore surface via NativeAepTurboCore) ---
+export const AepTurboCore = {
+  extensionVersion: () => NativeAepTurboCore.extensionVersion(),
+  configureWithAppId: (appId?: string) =>
+    NativeAepTurboCore.core_configureWithAppId(appId ?? ''),
+  initialize: (initOptions: Record<string, unknown>) =>
+    NativeAepTurboCore.core_initialize(initOptions),
+  clearUpdatedConfiguration: () => NativeAepTurboCore.core_clearUpdatedConfiguration(),
   updateConfiguration: (configMap?: Record<string, unknown>) =>
-    AepTurboCore.core_updateConfiguration(configMap ?? {}),
-  setLogLevel: (mode: string) => AepTurboCore.core_setLogLevel(mode),
-  getLogLevel: () => AepTurboCore.core_getLogLevel(),
-  setPrivacyStatus: (privacyStatus: string) => AepTurboCore.core_setPrivacyStatus(privacyStatus),
-  getPrivacyStatus: () => AepTurboCore.core_getPrivacyStatus(),
-  getSdkIdentities: () => AepTurboCore.core_getSdkIdentities(),
-  dispatchEvent: (event: Record<string, unknown>) => AepTurboCore.core_dispatchEvent(event),
-  dispatchEventWithResponseCallback: (event: Record<string, unknown>, timeoutMs: number) =>
-    AepTurboCore.core_dispatchEventWithResponseCallback(event, timeoutMs),
+    NativeAepTurboCore.core_updateConfiguration(configMap ?? {}),
+  setLogLevel: (mode: string) => NativeAepTurboCore.core_setLogLevel(mode),
+  getLogLevel: () => NativeAepTurboCore.core_getLogLevel(),
+  setPrivacyStatus: (privacyStatus: string) =>
+    NativeAepTurboCore.core_setPrivacyStatus(privacyStatus),
+  getPrivacyStatus: () => NativeAepTurboCore.core_getPrivacyStatus(),
+  getSdkIdentities: () => NativeAepTurboCore.core_getSdkIdentities(),
+  dispatchEvent: (event: Record<string, unknown>) =>
+    NativeAepTurboCore.core_dispatchEvent(event),
+  dispatchEventWithResponseCallback: (
+    event: Record<string, unknown>,
+    timeoutMs: number
+  ) => NativeAepTurboCore.core_dispatchEventWithResponseCallback(event, timeoutMs),
   trackAction: (action?: string, contextData?: Record<string, string> | null) =>
-    AepTurboCore.core_trackAction(action ?? '', contextData ?? null),
+    NativeAepTurboCore.core_trackAction(action ?? '', contextData ?? null),
   trackState: (state?: string, contextData?: Record<string, string> | null) =>
-    AepTurboCore.core_trackState(state ?? '', contextData ?? null),
+    NativeAepTurboCore.core_trackState(state ?? '', contextData ?? null),
   setAdvertisingIdentifier: (advertisingIdentifier?: string | null) =>
-    AepTurboCore.core_setAdvertisingIdentifier(advertisingIdentifier ?? null),
+    NativeAepTurboCore.core_setAdvertisingIdentifier(advertisingIdentifier ?? null),
   setPushIdentifier: (pushIdentifier?: string | null) =>
-    AepTurboCore.core_setPushIdentifier(pushIdentifier ?? null),
-  collectPii: (data: Record<string, string>) => AepTurboCore.core_collectPii(data),
-  setSmallIconResourceID: (resourceID: number) => AepTurboCore.core_setSmallIconResourceID(resourceID),
-  setLargeIconResourceID: (resourceID: number) => AepTurboCore.core_setLargeIconResourceID(resourceID),
-  setAppGroup: (appGroup?: string | null) => AepTurboCore.core_setAppGroup(appGroup ?? null),
-  resetIdentities: () => AepTurboCore.core_resetIdentities(),
+    NativeAepTurboCore.core_setPushIdentifier(pushIdentifier ?? null),
+  collectPii: (data: Record<string, string>) => NativeAepTurboCore.core_collectPii(data),
+  setSmallIconResourceID: (resourceID: number) =>
+    NativeAepTurboCore.core_setSmallIconResourceID(resourceID),
+  setLargeIconResourceID: (resourceID: number) =>
+    NativeAepTurboCore.core_setLargeIconResourceID(resourceID),
+  setAppGroup: (appGroup?: string | null) =>
+    NativeAepTurboCore.core_setAppGroup(appGroup ?? null),
+  resetIdentities: () => NativeAepTurboCore.core_resetIdentities(),
 };
 
 // --- Identity API ---
 export const Identity = {
-  extensionVersion: () => AepTurboCore.identity_extensionVersion(),
+  extensionVersion: () => NativeAepTurboCore.identity_extensionVersion(),
   syncIdentifiers: (identifiers?: Record<string, string> | null) =>
-    AepTurboCore.identity_syncIdentifiers(identifiers ?? null),
+    NativeAepTurboCore.identity_syncIdentifiers(identifiers ?? null),
   syncIdentifiersWithAuthState: (
     identifiers: Record<string, string> | null,
     authenticationState: string
-  ) => AepTurboCore.identity_syncIdentifiersWithAuthState(identifiers, authenticationState),
-  syncIdentifier: (identifierType: string, identifier: string, authenticationState: string) =>
-    AepTurboCore.identity_syncIdentifier(identifierType, identifier, authenticationState),
+  ) =>
+    NativeAepTurboCore.identity_syncIdentifiersWithAuthState(
+      identifiers,
+      authenticationState
+    ),
+  syncIdentifier: (
+    identifierType: string,
+    identifier: string,
+    authenticationState: string
+  ) =>
+    NativeAepTurboCore.identity_syncIdentifier(
+      identifierType,
+      identifier,
+      authenticationState
+    ),
   appendVisitorInfoForURL: (baseURL: string) =>
-    AepTurboCore.identity_appendVisitorInfoForURL(baseURL),
-  getUrlVariables: () => AepTurboCore.identity_getUrlVariables(),
-  getIdentifiers: () => AepTurboCore.identity_getIdentifiers(),
-  getExperienceCloudId: () => AepTurboCore.identity_getExperienceCloudId(),
+    NativeAepTurboCore.identity_appendVisitorInfoForURL(baseURL),
+  getUrlVariables: () => NativeAepTurboCore.identity_getUrlVariables(),
+  getIdentifiers: () => NativeAepTurboCore.identity_getIdentifiers(),
+  getExperienceCloudId: () => NativeAepTurboCore.identity_getExperienceCloudId(),
 };
 
 // --- Lifecycle API ---
 export const Lifecycle = {
-  extensionVersion: () => AepTurboCore.lifecycle_extensionVersion(),
+  extensionVersion: () => NativeAepTurboCore.lifecycle_extensionVersion(),
 };
 
 // --- Signal API ---
 export const Signal = {
-  extensionVersion: () => AepTurboCore.signal_extensionVersion(),
+  extensionVersion: () => NativeAepTurboCore.signal_extensionVersion(),
 };
 
-export default AepTurboCore;
+export default NativeAepTurboCore;
