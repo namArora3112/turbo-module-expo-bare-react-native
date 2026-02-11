@@ -12,7 +12,10 @@
   "dependencies": {
     "aep-turbo-core": "file:..",
     "react": "19.2.0",
-    "react-native": "0.83.0"
+    "react-native": "0.83.0",
+    "@adobe/react-native-aepmessaging": "latest",
+    "@adobe/react-native-aepedge": "latest",
+    "@adobe/react-native-aepedgeidentity": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
