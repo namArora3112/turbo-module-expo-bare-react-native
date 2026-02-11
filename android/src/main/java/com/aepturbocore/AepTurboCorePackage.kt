@@ -7,7 +7,12 @@ import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 
 /**
- * Registers AepTurboCore Turbo Module in the React Native runtime (per Turbo Native Modules doc).
+ * Registers AepTurboCore Turbo Module in the React Native runtime.
+ * Follows: https://reactnative.dev/docs/turbo-native-modules-introduction?platforms=android
+ *
+ * - Extends [BaseReactPackage]
+ * - [getModule] returns [AepTurboCoreModule] when name matches [AepTurboCoreModule.NAME]
+ * - [getReactModuleInfoProvider] returns [ReactModuleInfo] with isTurboModule = true
  */
 class AepTurboCorePackage : BaseReactPackage() {
 
@@ -22,12 +27,12 @@ class AepTurboCorePackage : BaseReactPackage() {
     ReactModuleInfoProvider {
       mapOf(
         AepTurboCoreModule.NAME to ReactModuleInfo(
-          AepTurboCoreModule.NAME,       // name
-          AepTurboCoreModule.NAME,       // className
-          false,                         // canOverrideExistingModule
-          false,                         // needsEagerInit
-          false,                         // isCxxModule
-          true                           // isTurboModule
+          name = AepTurboCoreModule.NAME,
+          className = AepTurboCoreModule.NAME,
+          canOverrideExistingModule = false,
+          needsEagerInit = false,
+          isCxxModule = false,
+          isTurboModule = true
         )
       )
     }

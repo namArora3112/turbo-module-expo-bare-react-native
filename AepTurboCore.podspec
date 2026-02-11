@@ -18,6 +18,15 @@ Pod::Spec.new do |s|
   s.private_header_files = "ios/AepTurboCoreAEP.h"
 
   s.dependency "AEPCore", ">= 5.4.0", "< 6.0.0"
+  s.dependency "AEPIdentity", ">= 5.4.0", "< 6.0.0"
+  s.dependency "AEPLifecycle", ">= 5.4.0", "< 6.0.0"
+  s.dependency "AEPSignal", ">= 5.4.0", "< 6.0.0"
+
+  # Required so that @import and AEP types work when compiling .mm (Objective-C++) files
+  s.pod_target_xcconfig = {
+    "CLANG_ENABLE_MODULES" => "YES",
+    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) -fcxx-modules"
+  }
 
   install_modules_dependencies(s)
 end
