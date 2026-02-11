@@ -1,0 +1,21 @@
+{
+  "name": "expo51turboexample",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "aep-turbo-core": "file:..",
+    "expo": "^51.0.0",
+    "expo-build-properties": "~0.12.5",
+    "expo-dev-client": "~4.0.0",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.5"
+  },
+  "private": true
+}
