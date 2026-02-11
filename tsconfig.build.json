@@ -1,1 +1,1 @@
-{"extends":"./tsconfig","exclude":["example","lib","RN074BareExample","expo-example"]}
+{"extends":"./tsconfig","exclude":["example","lib","RN074BareExample","Expo51TurboExample","expo-example"]}

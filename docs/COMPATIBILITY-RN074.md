@@ -6,6 +6,45 @@
 
 ---
 
+## Agenda 2: Expo 51 example (New Arch only)
+
+To get an **Expo 51** app (instead of current Expo 54+), create the app with the SDK 51 template so the version is fixed at creation time:
+
+```bash
+npx create-expo-app@latest MyExpo51App --template blank@51
+```
+
+The `@51` on the template pins the project to Expo SDK 51 (React Native 0.74). Omit `@51` to use the latest SDK.
+
+The repo includes **Expo51TurboExample** (`turboCore/Expo51TurboExample/`), which is pinned to Expo SDK 51 for testing the turbo module on Expo with **New Architecture** only:
+
+- **Expo:** `~51.0.0` / `^51.0.0`
+- **React:** `18.2.0`
+- **React Native:** `0.74.5`
+- **app.json:** New Arch enabled via **expo-build-properties** plugin (`ios.newArchEnabled`, `android.newArchEnabled`, `ios.useFrameworks: "static"`), plus `scheme` and `userInterfaceStyle: "automatic"` (reference: AEPSampleAppNewArchEnabled-style config).
+
+To (re)pin an existing Expo project to SDK 51, set in `package.json`: `"expo": "~51.0.0"`, `"react": "18.2.0"`, `"react-native": "0.74.5"`, then run:
+
+```bash
+npm install
+npx expo install "expo@^51.0.0" --fix
+```
+
+Turbo modules need a **development build** (not Expo Go). After adding `aep-turbo-core` and wiring the app, run `npx expo prebuild` then `npx expo run:android` or `npx expo run:ios`.
+
+**Expo51TurboExample** is set up with `aep-turbo-core` and uses it in `App.js` (multiply, extensionVersion). To run:
+
+```bash
+cd turboCore/Expo51TurboExample
+npm install
+npx expo prebuild --clean   # already run; needed if you add/change native deps
+npx expo run:android       # or npx expo run:ios
+```
+
+If Metro is already running on 8081 (e.g. for RN074BareExample), either stop it or choose a different port when prompted. If iOS `pod install` fails with `Unicode Normalization not appropriate for ASCII-8BIT`, set `export LANG=en_US.UTF-8` in your shell (or `~/.zshrc`) and run `cd ios && pod install` again.
+
+---
+
 ## Steps completed
 
 1. **Create bare RN 0.74 app**  
@@ -49,6 +88,16 @@
 ## Errors
 
 **None.** No build errors were encountered.
+
+---
+
+## Android: Aligned with Turbo Native Modules doc
+
+The Android implementation follows the [Turbo Native Modules introduction (Android)](https://reactnative-archive-august-2025.netlify.app/docs/turbo-native-modules-introduction?platforms=android):
+
+- **Module:** `AepTurboCoreModule` extends `NativeAepTurboCoreSpec(reactContext)`, implements `getName()`, no `@ReactModule` (registration is via the Package).
+- **Package:** `AepTurboCorePackage` extends `BaseReactPackage`, implements `getModule()` and `getReactModuleInfoProvider()` with `ReactModuleInfo` (`isTurboModule = true`).
+- **App registration:** The library is **autolinked** when the app depends on `aep-turbo-core`; `PackageList(this).packages` already includes `AepTurboCorePackage`. Do **not** add `AepTurboCorePackage()` manually in `MainApplication.getPackages()` or you will get “Native module AepTurboCore tried to override AepTurboCore”.
 
 ---
 
