@@ -1,4 +1,4 @@
-package aepturbocore.example
+package com.aepsampleapp
 
 import android.app.Application
 import com.facebook.react.PackageList

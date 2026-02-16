@@ -1,4 +1,4 @@
-package aepturbocore.example
+package com.aepsampleapp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

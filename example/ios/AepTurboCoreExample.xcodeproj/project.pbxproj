@@ -273,7 +273,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = aepturbocore.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aepsampleapp;
 				PRODUCT_NAME = AepTurboCoreExample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -300,7 +300,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = aepturbocore.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aepsampleapp;
 				PRODUCT_NAME = AepTurboCoreExample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

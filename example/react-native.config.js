@@ -3,6 +3,9 @@ const pkg = require('../package.json');
 
 module.exports = {
   project: {
+    android: {
+      packageName: 'com.aepsampleapp',
+    },
     ios: {
       automaticPodsInstallation: true,
     },

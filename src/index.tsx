@@ -16,6 +16,9 @@ export const AepTurboCore = {
   extensionVersion: () => NativeAepTurboCore.extensionVersion(),
   configureWithAppId: (appId?: string) =>
     NativeAepTurboCore.core_configureWithAppId(appId ?? ''),
+  /** Full SDK init (registers extensions). Use this at app startup instead of configureWithAppId. */
+  initializeWithAppId: (appId: string) =>
+    NativeAepTurboCore.core_initialize({appId}),
   initialize: (initOptions: Record<string, unknown>) =>
     NativeAepTurboCore.core_initialize(initOptions),
   clearUpdatedConfiguration: () => NativeAepTurboCore.core_clearUpdatedConfiguration(),

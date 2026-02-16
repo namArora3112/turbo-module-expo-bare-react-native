@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@adobe/react-native-aepassurance@latest":
+  version "7.0.0"
+  resolved "https://registry.npmjs.org/@adobe/react-native-aepassurance/-/react-native-aepassurance-7.0.0.tgz"
+  integrity sha512-HK8wjFVYwtueAkdkjupeuOLvbdJ3Tu1AgYwApcmFaJsWpP1MmAeBpgpLgNzDAbe+LE553wiVAZpf3IVMX50JvQ==
+
 "@adobe/react-native-aepedge@latest":
   version "7.0.0"
   resolved "https://registry.npmjs.org/@adobe/react-native-aepedge/-/react-native-aepedge-7.0.0.tgz"
@@ -2014,17 +2019,14 @@ acorn@^8.15.0:
   version "0.0.1"
   resolved "file:example"
   dependencies:
+    "@adobe/react-native-aepassurance" latest
+    "@adobe/react-native-aepcore" "^7.0.0"
     "@adobe/react-native-aepedge" latest
     "@adobe/react-native-aepedgeidentity" latest
     "@adobe/react-native-aepmessaging" latest
-    "@react-navigation/drawer" "^7.0.0"
-    "@react-navigation/native" "^7.0.0"
     aep-turbo-core "file:.."
     react "19.2.0"
     react-native "0.83.0"
-    react-native-gesture-handler "^2.0.0"
-    react-native-safe-area-context "^5.0.0"
-    react-native-screens "^4.0.0"
 
 "aep-turbo-core@file:..":
   version "0.1.0"

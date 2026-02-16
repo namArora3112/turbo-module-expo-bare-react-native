@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "aepturbocore.example"
+    namespace "com.aepsampleapp"
     defaultConfig {
-        applicationId "aepturbocore.example"
+        applicationId "com.aepsampleapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
